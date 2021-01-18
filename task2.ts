@@ -1,9 +1,9 @@
 const _ = {
-  sortedUnique: (array: number[]): number[] => {
+  sortedUnique: <T extends number | string>(array: T[]): T[] => {
     if (!array.length) {
       return [];
     }
-    const resultArray: number[] = [];
+    const resultArray: T[] = [];
     let lastValue = array[0];
     resultArray[0] = lastValue;
     for (let i = 1; i < array.length; i++) {
