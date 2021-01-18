@@ -1,0 +1,12 @@
+{
+  "name": "task2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc task2 && node task2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
