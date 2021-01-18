@@ -14,4 +14,13 @@ const _ = {
     }
     return resultArray;
   },
+  difference: <T extends number | string>(array: T[], another: T[]): T[] => {
+    const result: T[] = [];
+    for (const value of array) {
+      if (!another.includes(value)) {
+        result.push(value);
+      }
+    }
+    return result;
+  },
 };
