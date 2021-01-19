@@ -33,11 +33,7 @@ const _ = {
     if (obj1 === obj2) {
       return true;
     }
-    if (
-      typeof obj1 === 'number' || typeof obj1 === 'bigint' ||
-      typeof obj1 === 'string' || typeof obj1 === 'boolean' ||
-      typeof obj1 === 'symbol'
-    ) {
+    if (typeof obj1 !== 'object') {
       return false;
     }
 
