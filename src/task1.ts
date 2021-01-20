@@ -14,10 +14,10 @@ const _ = {
     }
     return resultArray;
   },
-  difference: <T, U>(array: T[], another: (T | U)[]) => {
+  difference: <T, U>(array: T[], another: (U)[]) => {
     const result = [];
     for (const value of array) {
-      if (!another.includes(value)) {
+      if (!another.includes(value as any)) {
         result.push(value);
       }
     }
