@@ -48,9 +48,8 @@ const _ = {
       }
       return true;
     }
-    const objectKeys = Object.keys(obj1);
-    for (let i = 0; i < objectKeys.length; i++) {
-      if (!_.isEqual(obj1[objectKeys[i]], obj2[objectKeys[i]])) {
+    for (let key in obj1) {
+      if (!_.isEqual(obj1[key], obj2[key])) {
         return false;
       }
     }
