@@ -1,31 +1,34 @@
 class Calculator {
-  #value: number;
+  #accumulator: number;
+  #result: number = 0;
 
   constructor(value: number) {
-    this.#value = value;
+    this.#accumulator = value;
   }
 
   plus(value: number) {
-    this.#value += value;
+    this.#result += this.#accumulator;
+    this.#accumulator = value;
     return this;
   }
 
   minus(value: number) {
-    this.#value -= value;
+    this.#result += this.#accumulator;
+    this.#accumulator = -value;
     return this;
   }
 
   multiply(value: number) {
-    this.#value *= value;
+    this.#accumulator *= value;
     return this;
   }
 
   divide(value: number) {
-    this.#value /= value;
+    this.#accumulator /= value;
     return this;
   }
 
   calculate() {
-    return this.#value;
+    return this.#result + this.#accumulator;
   }
 }
