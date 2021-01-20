@@ -14,8 +14,8 @@ const _ = {
     }
     return resultArray;
   },
-  difference: <T extends number | string>(array: T[], another: T[]): T[] => {
-    const result: T[] = [];
+  difference: <T, U>(array: T[], another: (T | U)[]) => {
+    const result = [];
     for (const value of array) {
       if (!another.includes(value)) {
         result.push(value);
