@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc task2 && node task2"
+    "start": "tsc"
   },
   "keywords": [],
   "author": "",
