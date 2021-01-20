@@ -30,6 +30,9 @@ const _ = {
     if (typeof obj1 !== typeof obj2) {
       return false;
     }
+    if (typeof obj1 === 'number' && isNaN(obj1) && isNaN(obj2)) {
+      return true;
+    }
     if (obj1 === obj2) {
       return true;
     }
