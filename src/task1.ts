@@ -30,20 +30,12 @@ const _ = {
     if (typeof obj1 !== typeof obj2) {
       return false;
     }
-    if (typeof obj1 === 'number' && isNaN(obj1) && isNaN(obj2)) {
+    if (typeof obj1 === 'number' && isNaN(obj1) && isNaN(obj2) || obj1 === obj2) {
       return true;
     }
-    if (obj1 === obj2) {
-      return true;
-    }
-    if (typeof obj1 !== 'object') {
+    if (typeof obj1 !== 'object' || Array.isArray(obj1) && obj1.length !== obj2.length) {
       return false;
     }
-
-    if (Array.isArray(obj1) && obj1.length !== obj2.length) {
-      return false;
-    }
-
     for (let key in obj1) {
       if (!_.isEqual(obj1[key], obj2[key])) {
         return false;
