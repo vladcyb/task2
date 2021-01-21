@@ -36,8 +36,13 @@ const _ = {
     if (typeof obj1 !== 'object' || Array.isArray(obj1) && obj1.length !== obj2.length) {
       return false;
     }
-    for (let key in obj1) {
-      if (!(key in obj2 && _.isEqual(obj1[key], obj2[key]))) {
+    const obj1Keys = Object.keys(obj1);
+    const obj2Keys = Object.keys(obj2);
+    if (obj1Keys.length !== obj2Keys.length) {
+      return false;
+    }
+    for (let key of obj1Keys) {
+      if (!(obj2.hasOwnProperty(key) && _.isEqual(obj1[key], obj2[key]))) {
         return false;
       }
     }
