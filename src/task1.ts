@@ -37,7 +37,7 @@ const _ = {
       return false;
     }
     for (let key in obj1) {
-      if (!_.isEqual(obj1[key], obj2[key])) {
+      if (!(key in obj2 && _.isEqual(obj1[key], obj2[key]))) {
         return false;
       }
     }
