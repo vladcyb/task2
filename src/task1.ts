@@ -3,9 +3,8 @@ const _ = {
     if (!array.length) {
       return [];
     }
-    const resultArray: T[] = [];
-    let lastValue = array[0];
-    resultArray[0] = lastValue;
+    let [lastValue] = array;
+    const resultArray = [lastValue];
     for (let i = 1; i < array.length; i++) {
       if (array[i] !== lastValue) {
         lastValue = array[i];
