@@ -29,9 +29,14 @@ function createClass(args) {
 
 // 3.
 class Car {
-  // type = "car";
+  type = "car";
+
+  getModel() {
+    return this.model;
+  }
+
   constructor() {
-    this.type = 'car';
+    // this.type = 'car';
   }
 }
 
@@ -43,9 +48,15 @@ class Audi {
   }
 }
 
+function extend(ChildClass, ParentClass) {
+  Object.setPrototypeOf(ChildClass.prototype, new ParentClass);
+}
 
+extend(Audi, Car);
 
 const car = new Car();
 const audi = new Audi('A8');
-console.log(car);
+
+console.log(audi.type);
+console.log(audi.getModel());
 console.log(audi);
