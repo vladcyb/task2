@@ -26,3 +26,26 @@ function createClass(args) {
     }
   };
 }
+
+// 3.
+class Car {
+  // type = "car";
+  constructor() {
+    this.type = 'car';
+  }
+}
+
+class Audi {
+  brand = 'Audi';
+
+  constructor(model) {
+    this.model = model;
+  }
+}
+
+
+
+const car = new Car();
+const audi = new Audi('A8');
+console.log(car);
+console.log(audi);
