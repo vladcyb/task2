@@ -1,5 +1,5 @@
 const _ = {
-  sortedUnique: <T extends number | string>(array: T[]): T[] => {
+  sortedUnique: (array) => {
     if (!array.length) {
       return [];
     }
@@ -13,16 +13,16 @@ const _ = {
     }
     return resultArray;
   },
-  difference: <T, U>(array: T[], another: U[]) => {
+  difference: (array, another) => {
     const result = [];
     for (const value of array) {
-      if (!another.includes(value as any)) {
+      if (!another.includes(value)) {
         result.push(value);
       }
     }
     return result;
   },
-  isEqual: (obj1: any, obj2: any): boolean => {
+  isEqual: (obj1, obj2) => {
     if (obj1 === null || obj2 === null) {
       return obj1 === obj2;
     }
