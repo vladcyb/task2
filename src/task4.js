@@ -47,33 +47,35 @@ const API = {
   oneSecondFetch: () => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve({method: 'oneSecondFetch'});
-      }, 1000)
+        resolve({ method: 'oneSecondFetch' });
+      }, 1000);
     });
   },
   twoSecondsFetch: () => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve({method: 'twoSecondsFetch'});
-      }, 2000)
+        resolve({ method: 'twoSecondsFetch' });
+      }, 2000);
     });
   },
   threeSecondsFetch: () => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve({method: 'threeSecondsFetch'});
-      }, 3000)
+        resolve({ method: 'threeSecondsFetch' });
+      }, 3000);
     });
-  }
+  },
 };
 
 const promiseAll = (promises) => {
+  const numberOfPromises = promises.length;
   return new Promise((resolve, reject) => {
-    const result = [];
-    promises.forEach(async (promise) => {
+    const result = new Array(numberOfPromises);
+    let count = 0;
+    promises.forEach(async (promise, index) => {
       try {
-        result.push(await promise);
-        if (result.length === promises.length) {
+        result[index] = await promise;
+        if (++count === numberOfPromises) {
           resolve(result);
         }
       } catch (e) {
@@ -98,9 +100,9 @@ const promiseRace = (promises) => {
 const promiseAllTest = async () => {
   try {
     const result = await promiseAll([
-      API.fakeFetch(1),
-      API.nonStableFetch(),
-      API.longFetch(),
+      API.threeSecondsFetch(),
+      API.oneSecondFetch(),
+      API.twoSecondsFetch(),
     ]);
     console.log(JSON.stringify(result, null, 2));
   } catch (e) {
