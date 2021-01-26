@@ -1,7 +1,7 @@
 const delay = (timeout) => {
   return new Promise(resolve => {
     setTimeout(() => {
-      resolve(timeout);
+      resolve(true);
     }, timeout);
   });
 };
@@ -14,38 +14,45 @@ const test1 = async () => {
 
 const getRandomBoolean = () => Math.floor(Math.random() * 2) === 0;
 
-
-const nonStableFetch = () => {
-  return new Promise((resolve, reject) => {
-    if (getRandomBoolean()) {
-      resolve({
-        data: { x: 1, yasdf: '323' },
-      });
-    } else {
-      reject('[nonStableFetch]: Network error!');
-    }
-  });
-};
-
-const fakeFetch = (x) => {
-  return new Promise((resolve, reject) => {
-    if (typeof x === 'undefined') {
-      reject('[fakeFetch]: x not provided');
-    } else {
-      resolve({
-        data: { value: Math.random() },
-      });
-    }
-  });
+const API = {
+  nonStableFetch: (isStable) => {
+    return new Promise((resolve, reject) => {
+      if (getRandomBoolean() || isStable) {
+        resolve({ data: { x: 1, yasdf: '323' } });
+      } else {
+        reject('[nonStableFetch]: Network error!');
+      }
+    });
+  },
+  fakeFetch: (x) => {
+    return new Promise((resolve, reject) => {
+      if (typeof x === 'undefined') {
+        reject('[fakeFetch]: x not provided');
+      } else if (getRandomBoolean()) {
+        setTimeout(() => {
+          resolve({ data: { value: Math.random() } });
+        }, 500);
+      } else {
+        reject('[fakeFetch]: Network error!');
+      }
+    });
+  },
+  longFetch: () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({ ok: true });
+      }, 1500);
+    });
+  },
 };
 
 const promiseAll = (promises) => {
   return new Promise((resolve, reject) => {
-    const result = new Array(promises.length);
-    promises.forEach(async (promise, index) => {
+    const result = [];
+    promises.forEach(async (promise) => {
       try {
-        result[index] = await promise;
-        if (index === promises.length - 1) {
+        result.push(await promise);
+        if (result.length === promises.length) {
           resolve(result);
         }
       } catch (e) {
@@ -57,9 +64,12 @@ const promiseAll = (promises) => {
 
 const test2 = async () => {
   try {
-    // const result = await Promise.all([nonStableFetch(), fakeFetch(1)]);
-    const result = await promiseAll([nonStableFetch(), fakeFetch(1)]);
-    console.log(JSON.stringify(result));
+    const result = await promiseAll([
+      API.fakeFetch(1),
+      API.nonStableFetch(),
+      API.longFetch(),
+    ]);
+    console.log(JSON.stringify(result, null, 2));
   } catch (e) {
     console.log(e);
   }
