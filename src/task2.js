@@ -32,6 +32,7 @@ function Calculator(initialValue) {
   };
 }
 
+/*
 console.log(
   new Calculator(23)
     .minus(3)
@@ -40,3 +41,4 @@ console.log(
     .plus(3.5)
     .calculate(),
 );
+*/

@@ -6,11 +6,7 @@ const delay = (timeout) => {
   });
 };
 
-const test1 = async () => {
-  console.log('start');
-  await delay(1000);
-  console.log('finish');
-};
+/* Для тестов
 
 const getRandomBoolean = () => Math.floor(Math.random() * 2) === 0;
 
@@ -67,36 +63,6 @@ const API = {
   },
 };
 
-const promiseAll = (promises) => {
-  const numberOfPromises = promises.length;
-  return new Promise((resolve, reject) => {
-    const result = new Array(numberOfPromises);
-    let count = 0;
-    promises.forEach(async (promise, index) => {
-      try {
-        result[index] = await promise;
-        if (++count === numberOfPromises) {
-          resolve(result);
-        }
-      } catch (e) {
-        reject(e);
-      }
-    });
-  });
-};
-
-const promiseRace = (promises) => {
-  return new Promise((resolve, reject) => {
-    promises.forEach(async (promise) => {
-      try {
-        resolve(await promise);
-      } catch (e) {
-        reject(e);
-      }
-    });
-  });
-};
-
 const promiseAllTest = async () => {
   try {
     const result = await promiseAll([
@@ -125,4 +91,36 @@ const promiseRaceTest = async () => {
 
 promiseAllTest();
 
-// promiseRaceTest();
+promiseRaceTest();
+ */
+
+const promiseAll = (promises) => {
+  const numberOfPromises = promises.length;
+  return new Promise((resolve, reject) => {
+    const result = new Array(numberOfPromises);
+    let count = 0;
+    promises.forEach(async (promise, index) => {
+      try {
+        result[index] = await promise;
+        if (++count === numberOfPromises) {
+          resolve(result);
+        }
+      } catch (e) {
+        reject('reject');
+      }
+    });
+  });
+};
+
+const promiseRace = (promises) => {
+  return new Promise((resolve, reject) => {
+    promises.forEach(async (promise) => {
+      try {
+        resolve(await promise);
+      } catch (e) {
+        reject(e);
+      }
+    });
+  });
+};
+

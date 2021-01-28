@@ -28,6 +28,11 @@ function createClass(args) {
 }
 
 // 3.
+function extend(ChildClass, ParentClass) {
+  Object.setPrototypeOf(ChildClass.prototype, new ParentClass);
+}
+
+/*
 class Car {
   type = "car";
 
@@ -48,10 +53,6 @@ class Audi {
   }
 }
 
-function extend(ChildClass, ParentClass) {
-  Object.setPrototypeOf(ChildClass.prototype, new ParentClass);
-}
-
 extend(Audi, Car);
 
 const car = new Car();
@@ -60,3 +61,5 @@ const audi = new Audi('A8');
 console.log(audi.type);
 console.log(audi.getModel());
 console.log(audi);
+
+*/
